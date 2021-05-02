@@ -1,0 +1,53 @@
+version: "2.0"
+
+stories:
+
+- story: flow 1
+  steps: 
+  - intent: reserve
+  - action: utter_reserve
+  - rule: Activate form
+    - steps: 
+      - intent: reserve
+      - action: restaurant_form
+      - active_loop: restaurant_form
+ 
+
+  - rule: Submit form 
+    condition: 
+    - active_loop: restaurant_from
+    steps: 
+    - action: restaurant_form
+    - active_loop: null
+    - slot_was_set: 
+      - requested_slot: null
+      - action: utter_section
+      - action: utter_when
+      - action: utter_slot_values
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye

@@ -1,0 +1,62 @@
+version: "2.0"
+
+intents:
+  - reserve 
+  - section
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+
+responses:
+  utter_reserve:
+  - text: "How many seats would you like to reserve"
+
+forms:
+  restaurant_form:
+    num_seats:
+      - type: from_text
+  
+slots: 
+  num_seats:
+    type: text
+  
+  utter_section:
+  - text: "Which section would you like to book"
+  buttons: 
+  - title: "AC"
+    payload: "AC done"
+  - title: "NON-AC"
+    payload: "NON-AC done"
+  
+  utter_when:
+  - text: When would you like to book a reservation? (We are only open from 7pm to 10pm)
+ 
+  utter_slot_values:
+  - text: "You have reserved {num_seats} seats in our AC section for 7:30pm. Thanks!"
+
+  utter_greet:
+  - text: "Hey! How can i help you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
